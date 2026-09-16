@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог — CV Камеры</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="header">
+    <div class="container header__inner">
+        <a class="logo" href="index.html">CV Камеры</a>
+        <nav class="nav">
+            <a class="nav__link" href="index.html">Главная</a>
+            <a class="nav__link nav__link--active" href="catalog.html">Каталог</a>
+            <a class="nav__link" href="auth.html">Войти</a>
+        </nav>
+    </div>
+</header>
+
+<main class="page">
+    <div class="container">
+        <div class="page__heading">
+            <div>
+                <h1 class="page__title">Каталог камер</h1>
+                <p class="page__text">Камеры для задач машинного и компьютерного зрения.</p>
+            </div>
+        </div>
+
+        <div class="catalog-layout">
+            <aside class="filters">
+                <h2>Фильтры</h2>
+                <div class="field">
+                    <label for="interface">Интерфейс</label>
+                    <select id="interface">
+                        <option>Все</option>
+                        <option>GigE</option>
+                        <option>USB3</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="resolution">Разрешение</label>
+                    <select id="resolution">
+                        <option>Любое</option>
+                        <option>2 Мп</option>
+                        <option>5 Мп</option>
+                        <option>12 Мп</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="type">Тип камеры</label>
+                    <select id="type">
+                        <option>Все</option>
+                        <option>Цветная</option>
+                        <option>Монохромная</option>
+                    </select>
+                </div>
+                <button class="button button--full" type="button">Применить</button>
+            </aside>
+
+            <section class="catalog-products">
+                <article class="product-card">
+                    <div class="product-card__preview"><span>5 MP / GigE</span></div>
+                    <div class="product-card__body">
+                        <span class="product-card__brand">Hikrobot</span>
+                        <h2>MV-CS050-10GC</h2>
+                        <p>Цветная CMOS-камера для систем машинного зрения.</p>
+                        <ul class="product-card__specs"><li>5 Мп</li><li>GigE</li><li>CMOS</li></ul>
+                        <div class="product-card__footer"><strong>48 900 ₽</strong><a class="button button--small" href="#">Купить</a></div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-card__preview"><span>5 MP / USB3</span></div>
+                    <div class="product-card__body">
+                        <span class="product-card__brand">Daheng Imaging</span>
+                        <h2>MER2-503-36U3M</h2>
+                        <p>Монохромная камера с интерфейсом USB3.</p>
+                        <ul class="product-card__specs"><li>5 Мп</li><li>USB3</li><li>Mono CMOS</li></ul>
+                        <div class="product-card__footer"><strong>42 500 ₽</strong><a class="button button--small" href="#">Купить</a></div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-card__preview"><span>2 MP / USB3</span></div>
+                    <div class="product-card__body">
+                        <span class="product-card__brand">Basler</span>
+                        <h2>ace 2</h2>
+                        <p>Компактная промышленная камера для высокоскоростной съёмки.</p>
+                        <ul class="product-card__specs"><li>2 Мп</li><li>USB3</li><li>CMOS</li></ul>
+                        <div class="product-card__footer"><strong>61 000 ₽</strong><a class="button button--small" href="#">Купить</a></div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-card__preview"><span>12 MP / GigE</span></div>
+                    <div class="product-card__body">
+                        <span class="product-card__brand">Hikrobot</span>
+                        <h2>MV-CH120-10GM</h2>
+                        <p>Камера высокого разрешения для контроля деталей.</p>
+                        <ul class="product-card__specs"><li>12 Мп</li><li>GigE</li><li>Mono CMOS</li></ul>
+                        <div class="product-card__footer"><strong>74 900 ₽</strong><a class="button button--small" href="#">Купить</a></div>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container footer__inner"><span>© 2026 CV Камеры</span><span>Каталог оборудования</span></div>
+</footer>
+</body>
+</html>
