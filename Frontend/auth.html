@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход и регистрация — CV Камеры</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="header">
+    <div class="container header-content">
+        <a class="logo" href="index.html">CV Камеры</a>
+        <nav class="nav">
+            <a class="nav-link" href="index.html">Главная</a>
+            <a class="nav-link" href="catalog.html">Каталог</a>
+            <a class="nav-link nav-active" href="auth.html">Вход / Регистрация</a>
+        </nav>
+    </div>
+</header>
+
+<main class="auth-wrap">
+    <div class="auth-grid">
+        <form class="auth-card">
+            <h1>Вход</h1>
+            <p>Введите данные своей учётной записи.</p>
+            <div class="field">
+                <label for="login-email">Электронная почта</label>
+                <input id="login-email" type="email" placeholder="example@mail.ru">
+            </div>
+            <div class="field">
+                <label for="login-password">Пароль</label>
+                <input id="login-password" type="password" placeholder="Введите пароль">
+            </div>
+            <button class="button button-full" type="submit">Войти</button>
+        </form>
+
+        <form class="auth-card">
+            <h1>Регистрация</h1>
+            <p>Создайте новую учётную запись.</p>
+            <div class="field">
+                <label for="register-name">Имя</label>
+                <input id="register-name" type="text" placeholder="Введите имя">
+            </div>
+            <div class="field">
+                <label for="register-email">Электронная почта</label>
+                <input id="register-email" type="email" placeholder="example@mail.ru">
+            </div>
+            <div class="field">
+                <label for="register-password">Пароль</label>
+                <input id="register-password" type="password" placeholder="Придумайте пароль">
+            </div>
+            <button class="button button-full" type="submit">Зарегистрироваться</button>
+        </form>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container footer-content"><span>© 2026 CV Камеры</span><span>Личный кабинет</span></div>
+</footer>
+</body>
+</html>
