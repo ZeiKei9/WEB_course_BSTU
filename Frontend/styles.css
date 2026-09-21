@@ -71,20 +71,20 @@ button, input, select { font: inherit; }
 .button-small { min-height: 36px; padding: 0 13px; font-size: 14px; }
 .button-full { width: 100%; }
 
-.hero {
+.main-block {
     padding: 58px 0;
     background: #fff;
     border-bottom: 1px solid var(--line);
 }
 
-.hero-content {
+.main-content {
     display: grid;
     grid-template-columns: 1.1fr .9fr;
     gap: 46px;
     align-items: center;
 }
 
-.hero-badge {
+.main-label {
     display: inline-block;
     margin-bottom: 14px;
     padding: 7px 11px;
@@ -95,14 +95,14 @@ button, input, select { font: inherit; }
     font-weight: 700;
 }
 
-.hero h1 {
+.main-block h1 {
     margin: 0;
     max-width: 650px;
     font-size: clamp(38px, 5vw, 60px);
     line-height: 1.06;
 }
 
-.hero p {
+.main-block p {
     max-width: 620px;
     margin: 20px 0 0;
     color: var(--muted);
@@ -110,37 +110,37 @@ button, input, select { font: inherit; }
     line-height: 1.6;
 }
 
-.hero-actions {
+.main-buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 28px;
 }
 
-.hero-box {
+.main-box {
     padding: 28px;
     border: 1px solid var(--line);
     border-radius: 12px;
     background: #f8fafc;
 }
 
-.hero-box-title { margin: 0 0 20px; font-size: 22px; }
+.main-box-title { margin: 0 0 20px; font-size: 22px; }
 
-.hero-box-grid {
+.main-box-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
 }
 
-.hero-box-item {
+.main-box-item {
     padding: 16px;
     border: 1px solid var(--line);
     border-radius: 8px;
     background: #fff;
 }
 
-.hero-box-item strong { display: block; margin-bottom: 5px; font-size: 19px; }
-.hero-box-item span { color: var(--muted); font-size: 13px; }
+.main-box-item strong { display: block; margin-bottom: 5px; font-size: 19px; }
+.main-box-item span { color: var(--muted); font-size: 13px; }
 
 .section { padding: 58px 0; }
 .white-section { background: #fff; border-block: 1px solid var(--line); }
@@ -273,7 +273,7 @@ button, input, select { font: inherit; }
 .auth-card > p { margin: 10px 0 24px; color: var(--muted); line-height: 1.5; }
 
 @media (max-width: 850px) {
-    .hero-content, .catalog-layout, .auth-grid { grid-template-columns: 1fr; }
+    .main-content, .catalog-layout, .auth-grid { grid-template-columns: 1fr; }
     .categories, .products, .catalog-products { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -285,9 +285,9 @@ button, input, select { font: inherit; }
 
     .header-content { padding: 16px 0; }
     .nav { gap: 16px; flex-wrap: wrap; }
-    .hero { padding: 42px 0; }
-    .hero h1 { font-size: 38px; }
-    .hero-box-grid, .categories, .products, .catalog-products { grid-template-columns: 1fr; }
+    .main-block { padding: 42px 0; }
+    .main-block h1 { font-size: 38px; }
+    .main-box-grid, .categories, .products, .catalog-products { grid-template-columns: 1fr; }
     .section, .page { padding: 42px 0; }
     .footer-content { padding: 18px 0; }
 }
