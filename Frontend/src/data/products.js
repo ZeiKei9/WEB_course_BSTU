@@ -1,0 +1,39 @@
+// Одна коллекция используется на главной странице и в каталоге.
+export const products = [
+  {
+    brand: 'Hikrobot',
+    model: 'MV-CS050-10GC',
+    description: 'Цветная CMOS-камера для систем машинного зрения.',
+    resolution: 5,
+    interfaceType: 'GigE',
+    sensor: 'CMOS',
+    price: 48900,
+  },
+  {
+    brand: 'Daheng Imaging',
+    model: 'MER2-503-36U3M',
+    description: 'Монохромная камера с интерфейсом USB3.',
+    resolution: 5,
+    interfaceType: 'USB3',
+    sensor: 'Mono CMOS',
+    price: 42500,
+  },
+  {
+    brand: 'Basler',
+    model: 'ace 2',
+    description: 'Компактная промышленная камера для высокоскоростной съёмки.',
+    resolution: 2,
+    interfaceType: 'USB3',
+    sensor: 'CMOS',
+    price: 61000,
+  },
+  {
+    brand: 'Hikrobot',
+    model: 'MV-CH120-10GM',
+    description: 'Камера высокого разрешения для контроля деталей.',
+    resolution: 12,
+    interfaceType: 'GigE',
+    sensor: 'Mono CMOS',
+    price: 74900,
+  },
+];

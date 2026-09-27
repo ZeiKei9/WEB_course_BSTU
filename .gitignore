@@ -566,3 +566,6 @@ fabric.properties
 ### AndroidStudio Patch ###
 
 !/gradle/wrapper/gradle-wrapper.jar
+
+# Temporary Microsoft Word lock files
+~$*.docx
