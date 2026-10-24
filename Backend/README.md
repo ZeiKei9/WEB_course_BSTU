@@ -31,7 +31,10 @@ docker compose down
 
 1. Нажать **Import** и выбрать `Lab3.postman_collection.json` из этой папки.
 2. Открыть запрос **Камеры** и нажать **Send**. Ожидается `200 OK` и JSON-массив из четырёх камер.
-3. Открыть запрос **Категории** и нажать **Send**. Ожидается `200 OK` и JSON-массив из трёх категорий.
+3. Открыть запрос **Камера по ID** и нажать **Send**. Ожидается `200 OK` и JSON-объект камеры с ID 1. Можно менять ID от 1 до 4.
+4. Открыть запрос **Категории** и нажать **Send**. Ожидается `200 OK` и JSON-массив из трёх категорий.
+
+Если запросить камеру с неизвестным ID, например `/api/cameras/999`, сервер вернёт `404 Not Found` и сообщение `Камера не найдена.`.
 
 Адрес сервера задан переменной коллекции `baseUrl`: `http://localhost:8000`.
 
@@ -39,14 +42,15 @@ docker compose down
 
 ```text
 http://localhost:8000/api/cameras
+http://localhost:8000/api/cameras/1
 http://localhost:8000/api/categories
 ```
 
 ## Где находится код
 
-- `app/Http/Controllers/CameraController.php` — статический массив камер.
+- `app/Http/Controllers/CameraController.php` — статический массив камер, метод `index()` для списка и `show($id)` для одной камеры.
 - `app/Http/Controllers/CategoryController.php` — статический массив категорий.
-- `routes/api.php` — два маршрута: `GET /api/cameras` и `GET /api/categories`.
+- `routes/api.php` — три маршрута: `GET /api/cameras`, `GET /api/cameras/{id}` и `GET /api/categories`.
 - `bootstrap/app.php` — подключение файла маршрутов API.
 - `composer.json` — зависимости Laravel и модуль API Laravel Sanctum, установленный командой `php artisan install:api`.
 - `Dockerfile` — PHP и Composer внутри контейнера.

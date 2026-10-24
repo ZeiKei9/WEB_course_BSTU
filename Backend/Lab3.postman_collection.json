@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "Лабораторная работа №3",
-    "description": "Два GET-запроса к Laravel API со статическими данными.",
+    "description": "GET-запросы к Laravel API со статическими данными.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -17,6 +17,18 @@
           "raw": "{{baseUrl}}/api/cameras",
           "host": ["{{baseUrl}}"],
           "path": ["api", "cameras"]
+        }
+      }
+    },
+    {
+      "name": "Камера по ID",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": {
+          "raw": "{{baseUrl}}/api/cameras/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "cameras", "1"]
         }
       }
     },
