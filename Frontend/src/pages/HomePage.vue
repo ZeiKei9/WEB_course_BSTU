@@ -1,25 +1,28 @@
 <script setup>
+import { onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import ProductCard from '../components/ProductCard.vue';
-import { products } from '../data/products.js';
+import { getApiData } from '../api.js';
 
-const categories = [
-  {
-    number: '01',
-    title: 'GigE камеры',
-    description: 'Для подключения по Ethernet и работы на большом расстоянии от компьютера.',
-  },
-  {
-    number: '02',
-    title: 'USB3 камеры',
-    description: 'Для систем, где нужна высокая скорость передачи данных и простое подключение.',
-  },
-  {
-    number: '03',
-    title: 'Монохромные камеры',
-    description: 'Для технического зрения, измерений и задач, где цвет не является главным параметром.',
-  },
-];
+const products = ref([]);
+const categories = ref([]);
+const loading = ref(true);
+const error = ref('');
+
+onMounted(async () => {
+  try {
+    const [cameras, cameraCategories] = await Promise.all([
+      getApiData('cameras'),
+      getApiData('categories'),
+    ]);
+    products.value = cameras;
+    categories.value = cameraCategories;
+  } catch {
+    error.value = 'Не удалось загрузить данные. Попробуйте обновить страницу.';
+  } finally {
+    loading.value = false;
+  }
+});
 </script>
 
 <template>
@@ -53,10 +56,12 @@ const categories = [
           <h2 class="section-title">Категории</h2>
           <p class="section-text">Основные типы камер для разных задач.</p>
         </div>
-        <div class="categories">
-          <article v-for="category in categories" :key="category.title" class="category">
-            <div class="category-number">{{ category.number }}</div>
-            <h3 class="category-title">{{ category.title }}</h3>
+        <p v-if="loading" class="section-text" role="status">Загрузка категорий...</p>
+        <p v-else-if="error" class="section-text" role="alert">{{ error }}</p>
+        <div v-else class="categories">
+          <article v-for="category in categories" :key="category.id" class="category">
+            <div class="category-number">{{ String(category.id).padStart(2, '0') }}</div>
+            <h3 class="category-title">{{ category.name }}</h3>
             <p class="category-description">{{ category.description }}</p>
           </article>
         </div>
@@ -72,8 +77,10 @@ const categories = [
           </div>
           <RouterLink class="text-link" to="/catalog">Смотреть все</RouterLink>
         </div>
-        <div class="products">
-          <ProductCard v-for="product in products.slice(0, 3)" :key="product.model" :product="product" />
+        <p v-if="loading" class="section-text" role="status">Загрузка камер...</p>
+        <p v-else-if="error" class="section-text" role="alert">{{ error }}</p>
+        <div v-else class="products">
+          <ProductCard v-for="product in products.slice(0, 3)" :key="product.id" :product="product" />
         </div>
       </div>
     </section>
