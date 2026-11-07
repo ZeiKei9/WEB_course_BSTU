@@ -1,21 +1,6 @@
 <script setup>
-import { onMounted, ref } from 'vue';
 import ProductCard from '../components/ProductCard.vue';
-import { getApiData } from '../api.js';
-
-const products = ref([]);
-const loading = ref(true);
-const error = ref('');
-
-onMounted(async () => {
-  try {
-    products.value = await getApiData('cameras');
-  } catch {
-    error.value = 'Не удалось загрузить камеры. Попробуйте обновить страницу.';
-  } finally {
-    loading.value = false;
-  }
-});
+import { products } from '../data/products.js';
 </script>
 
 <template>
@@ -60,11 +45,7 @@ onMounted(async () => {
         </aside>
 
         <section class="catalog-products" aria-label="Камеры">
-          <p v-if="loading" class="section-text" role="status">Загрузка камер...</p>
-          <p v-else-if="error" class="section-text" role="alert">{{ error }}</p>
-          <template v-else>
-            <ProductCard v-for="product in products" :key="product.id" :product="product" show-specs />
-          </template>
+          <ProductCard v-for="product in products" :key="product.id" :product="product" show-specs />
         </section>
       </div>
     </div>

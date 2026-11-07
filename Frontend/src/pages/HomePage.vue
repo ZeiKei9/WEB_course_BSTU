@@ -1,28 +1,7 @@
 <script setup>
-import { onMounted, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import ProductCard from '../components/ProductCard.vue';
-import { getApiData } from '../api.js';
-
-const products = ref([]);
-const categories = ref([]);
-const loading = ref(true);
-const error = ref('');
-
-onMounted(async () => {
-  try {
-    const [cameras, cameraCategories] = await Promise.all([
-      getApiData('cameras'),
-      getApiData('categories'),
-    ]);
-    products.value = cameras;
-    categories.value = cameraCategories;
-  } catch {
-    error.value = 'Не удалось загрузить данные. Попробуйте обновить страницу.';
-  } finally {
-    loading.value = false;
-  }
-});
+import { products, categories } from '../data/products.js';
 </script>
 
 <template>
@@ -56,9 +35,7 @@ onMounted(async () => {
           <h2 class="section-title">Категории</h2>
           <p class="section-text">Основные типы камер для разных задач.</p>
         </div>
-        <p v-if="loading" class="section-text" role="status">Загрузка категорий...</p>
-        <p v-else-if="error" class="section-text" role="alert">{{ error }}</p>
-        <div v-else class="categories">
+        <div class="categories">
           <article v-for="category in categories" :key="category.id" class="category">
             <div class="category-number">{{ String(category.id).padStart(2, '0') }}</div>
             <h3 class="category-title">{{ category.name }}</h3>
@@ -77,9 +54,7 @@ onMounted(async () => {
           </div>
           <RouterLink class="text-link" to="/catalog">Смотреть все</RouterLink>
         </div>
-        <p v-if="loading" class="section-text" role="status">Загрузка камер...</p>
-        <p v-else-if="error" class="section-text" role="alert">{{ error }}</p>
-        <div v-else class="products">
+        <div class="products">
           <ProductCard v-for="product in products.slice(0, 3)" :key="product.id" :product="product" />
         </div>
       </div>
