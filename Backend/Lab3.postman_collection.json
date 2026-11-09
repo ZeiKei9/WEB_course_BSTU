@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "Лабораторная работа №3",
-    "description": "GET-запросы к Laravel API со статическими данными.",
+    "name": "Лабораторные работы №3–4",
+    "description": "GET-запросы к Laravel API. Камеры, их категории и производители читаются из PostgreSQL через модели Eloquent.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
