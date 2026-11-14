@@ -1,0 +1,509 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REST API каталога камер",
+    "version": "1.0.0",
+    "description": "Лабораторная работа 5"
+  },
+  "servers": [
+    {
+      "url": "/api",
+      "description": "API текущего сервера"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Камеры"
+    },
+    {
+      "name": "Категории"
+    }
+  ],
+  "paths": {
+    "/cameras": {
+      "get": {
+        "tags": [
+          "Камеры"
+        ],
+        "summary": "Получить список камер",
+        "operationId": "getCameras",
+        "description": "Камеры с категориями и производителями, по возрастанию id. Пустой список возвращается как [].",
+        "responses": {
+          "200": {
+            "description": "Список камер",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Camera"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Камеры"
+        ],
+        "summary": "Получить заголовки списка камер",
+        "operationId": "headCameras",
+        "responses": {
+          "200": {
+            "description": "Статус и заголовки, без тела ответа"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Камеры"
+        ],
+        "summary": "Создать камеру",
+        "operationId": "createCamera",
+        "description": "Передайте все восемь обязательных полей. Значение model должно быть уникальным: при повторной проверке измените его в примере. Скопируйте id из ответа для последующих GET, PUT и DELETE.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CameraInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Камера создана",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Camera"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationError"
+          }
+        }
+      }
+    },
+    "/cameras/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Числовой идентификатор камеры.",
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Камеры"
+        ],
+        "summary": "Получить одну камеру",
+        "operationId": "getCamera",
+        "responses": {
+          "200": {
+            "description": "Камера с категорией и производителем",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Camera"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Камеры"
+        ],
+        "summary": "Получить заголовки одной камеры",
+        "operationId": "headCamera",
+        "responses": {
+          "200": {
+            "description": "Камера найдена. Тело ответа отсутствует."
+          },
+          "404": {
+            "description": "Камера не найдена. Тело ответа отсутствует."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Камеры"
+        ],
+        "summary": "Изменить камеру",
+        "operationId": "updateCamera",
+        "description": "Передайте полный набор из восьми редактируемых полей. Частичное обновление не поддерживается.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CameraInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Камера изменена",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Camera"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/ValidationError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Камеры"
+        ],
+        "summary": "Удалить камеру",
+        "operationId": "deleteCamera",
+        "description": "Удаляет камеру из базы. Повторный запрос для удалённой камеры возвращает 404.",
+        "responses": {
+          "204": {
+            "description": "Камера удалена. Тело ответа отсутствует."
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": [
+          "Категории"
+        ],
+        "summary": "Получить список категорий",
+        "operationId": "getCategories",
+        "responses": {
+          "200": {
+            "description": "Список категорий по возрастанию id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Категории"
+        ],
+        "summary": "Получить заголовки списка категорий",
+        "operationId": "headCategories",
+        "responses": {
+          "200": {
+            "description": "Статус и заголовки, без тела ответа"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CameraInput": {
+        "type": "object",
+        "required": [
+          "model",
+          "description",
+          "resolution",
+          "interface_type",
+          "sensor",
+          "price",
+          "category_id",
+          "brand_id"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Уникальная модель камеры. При PUT разрешена модель самой изменяемой камеры."
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Описание камеры."
+          },
+          "resolution": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 32767,
+            "description": "Разрешение в мегапикселях."
+          },
+          "interface_type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Интерфейс подключения."
+          },
+          "sensor": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Тип сенсора."
+          },
+          "price": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 99999999.99,
+            "multipleOf": 0.01,
+            "description": "Цена, максимум два знака после запятой."
+          },
+          "category_id": {
+            "type": "integer",
+            "description": "ID существующей категории. Список доступен через GET /categories."
+          },
+          "brand_id": {
+            "type": "integer",
+            "description": "ID существующего производителя. Значения видны в brand_id и brand существующих камер."
+          }
+        },
+        "example": {
+          "model": "Учебная камера Lab5",
+          "description": "Камера для проверки REST API",
+          "resolution": 5,
+          "interface_type": "GigE",
+          "sensor": "CMOS",
+          "price": 53000,
+          "category_id": 1,
+          "brand_id": 1
+        }
+      },
+      "Camera": {
+        "type": "object",
+        "required": [
+          "id",
+          "model",
+          "description",
+          "resolution",
+          "interface_type",
+          "sensor",
+          "price",
+          "category_id",
+          "brand_id",
+          "created_at",
+          "updated_at",
+          "category",
+          "brand"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "model": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Уникальная модель камеры. При PUT разрешена модель самой изменяемой камеры."
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Описание камеры."
+          },
+          "resolution": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 32767,
+            "description": "Разрешение в мегапикселях."
+          },
+          "interface_type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Интерфейс подключения."
+          },
+          "sensor": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "Тип сенсора."
+          },
+          "price": {
+            "type": "string",
+            "example": "53000.00",
+            "description": "PostgreSQL numeric возвращается строкой."
+          },
+          "category_id": {
+            "type": "integer",
+            "description": "ID существующей категории. Список доступен через GET /categories."
+          },
+          "brand_id": {
+            "type": "integer",
+            "description": "ID существующего производителя. Значения видны в brand_id и brand существующих камер."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "brand": {
+            "$ref": "#/components/schemas/Brand"
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Brand": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "required": [
+          "message",
+          "errors"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "example": {
+          "message": "The price field must be at least 0.",
+          "errors": {
+            "price": [
+              "The price field must be at least 0."
+            ]
+          }
+        }
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "Камера не найдена или id в пути не является числом.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "example": {
+              "message": "Камера не найдена."
+            }
+          }
+        }
+      },
+      "ValidationError": {
+        "description": "Данные не прошли проверку",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      }
+    }
+  }
+}

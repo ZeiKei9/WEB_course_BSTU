@@ -1,22 +1,41 @@
 {
   "info": {
-    "name": "Лабораторные работы №3–4",
-    "description": "GET-запросы к Laravel API. Камеры, их категории и производители читаются из PostgreSQL через модели Eloquent.",
+    "name": "Лабораторные работы №3–5",
+    "description": "REST API камер на Laravel и PostgreSQL. Для PUT и DELETE установите cameraId равным id камеры, полученному после POST.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
-    { "key": "baseUrl", "value": "http://localhost:8000", "type": "string" }
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "cameraId",
+      "value": "0",
+      "type": "string"
+    }
   ],
   "item": [
     {
       "name": "Камеры",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Accept", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
         "url": {
           "raw": "{{baseUrl}}/api/cameras",
-          "host": ["{{baseUrl}}"],
-          "path": ["api", "cameras"]
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "cameras"
+          ]
         }
       }
     },
@@ -24,11 +43,22 @@
       "name": "Камера по ID",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Accept", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
         "url": {
-          "raw": "{{baseUrl}}/api/cameras/1",
-          "host": ["{{baseUrl}}"],
-          "path": ["api", "cameras", "1"]
+          "raw": "{{baseUrl}}/api/cameras/{{cameraId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "cameras",
+            "{{cameraId}}"
+          ]
         }
       }
     },
@@ -36,12 +66,100 @@
       "name": "Категории",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Accept", "value": "application/json" }],
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
         "url": {
           "raw": "{{baseUrl}}/api/categories",
-          "host": ["{{baseUrl}}"],
-          "path": ["api", "categories"]
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "categories"
+          ]
         }
+      }
+    },
+    {
+      "name": "Проверить заголовки камер",
+      "request": {
+        "method": "HEAD",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cameras"
+      }
+    },
+    {
+      "name": "Создать камеру",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cameras",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"model\": \"Учебная камера Lab5\",\n  \"description\": \"Камера для проверки REST API\",\n  \"resolution\": 5,\n  \"interface_type\": \"GigE\",\n  \"sensor\": \"CMOS\",\n  \"price\": 53000,\n  \"category_id\": 1,\n  \"brand_id\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Изменить камеру",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cameras/{{cameraId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"model\": \"Учебная камера Lab5\",\n  \"description\": \"Камера для проверки REST API\",\n  \"resolution\": 5,\n  \"interface_type\": \"GigE\",\n  \"sensor\": \"CMOS\",\n  \"price\": 55000,\n  \"category_id\": 1,\n  \"brand_id\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Удалить камеру",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/cameras/{{cameraId}}"
       }
     }
   ]

@@ -2,26 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Camera;
+use App\Services\CameraService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CameraController extends Controller
 {
+    public function __construct(private CameraService $service) {}
+
     public function index(): JsonResponse
     {
-        $cameras = Camera::with(['category', 'brand'])->orderBy('id')->get();
-
-        return response()->json($cameras);
+        return response()->json($this->service->findAll());
     }
 
     public function show(string $id): JsonResponse
     {
-        $camera = Camera::with(['category', 'brand'])->find($id);
+        return response()->json($this->service->findById($id));
+    }
 
-        if (! $camera) {
-            return response()->json(['message' => 'Камера не найдена.'], 404);
-        }
+    public function store(Request $request): JsonResponse
+    {
+        return response()->json($this->service->create($request->all()), 201);
+    }
 
-        return response()->json($camera);
+    public function update(Request $request, string $id): JsonResponse
+    {
+        return response()->json($this->service->update($id, $request->all()));
+    }
+
+    public function destroy(string $id): Response
+    {
+        $this->service->delete($id);
+
+        return response()->noContent();
     }
 }

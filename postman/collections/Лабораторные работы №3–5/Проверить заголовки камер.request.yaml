@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{baseUrl}}/api/cameras"
+method: HEAD
+headers:
+  Accept: application/json
+order: 4000

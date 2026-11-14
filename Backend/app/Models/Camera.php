@@ -9,6 +9,17 @@ class Camera extends Model
 {
     protected $table = 'cameras';
 
+    protected $fillable = [
+        'model',
+        'description',
+        'resolution',
+        'interface_type',
+        'sensor',
+        'price',
+        'category_id',
+        'brand_id',
+    ];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');

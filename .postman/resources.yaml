@@ -1,0 +1,11 @@
+# Use this workspace to collaborate
+workspace:
+  id: f3710ef4-3e15-4cde-86b9-dea6b4683a71
+
+localResources:
+  collections:
+    - ../Backend/Lab3.postman_collection.json
+
+cloudResources:
+  collections:
+    ../postman/collections/Лабораторные работы №3–5: 055fabae-0968-424a-aab6-60280efe3bc5

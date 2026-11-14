@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Services\CategoryService;
 use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
+    public function __construct(private CategoryService $service) {}
+
     public function index(): JsonResponse
     {
-        $categories = Category::orderBy('id')->get();
-
-        return response()->json($categories);
+        return response()->json($this->service->findAll());
     }
 }

@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{baseUrl}}/api/cameras/{{cameraId}}"
+method: DELETE
+headers:
+  Accept: application/json
+order: 7000
